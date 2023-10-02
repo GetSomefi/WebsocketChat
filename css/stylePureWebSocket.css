@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+body{
+    padding: 0;
+    margin: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.data-container{
+    text-align: center;
+}
+
+.side-by-side{
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    overflow: hidden;
+}
+#chat-view,
+#mag-ul{
+    display: flex;
+    flex-direction: column-reverse;
+}
+div#additional-notifications {
+    margin-bottom: 15px;
+}
+div#additional-notifications span{
+    position: relative;
+    height: 25px;
+}
+.user-is-writing {
+    background: #6d918d;
+    padding: 5px 15px;
+    border-radius: 100px;
+    color: #FFF;
+    font-size: 0.6em;
+    max-width: 250px;
+    overflow: hidden;
+    display: inline;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+form {
+    padding: 15px 15px;
+    background: black;
+    color: #57ff57;
+    text-shadow: 0 0 #aeffae;
+}
+span#type-icon, input#msg, input#uname {
+    background: black;
+    border: none;
+    padding-left: 8px;
+    font-family: monospace;
+    color: #57ff5794;
+    text-shadow: 1px 1px #aeffae;
+    outline: none;
+}
+input#msg::placeholder {
+    color: #57ff5794;
+    text-shadow: 1px 1px #aeffae;
+    opacity: 1; /* Firefox */
+}
+
+div#login, input[type=submit] {
+    background: transparent;
+    width: 100px;
+    white-space: nowrap;
+    padding: 10px;
+    display: inline-block;
+    margin-left: 15px;
+    color: #57ff5794;
+    text-shadow: 1px 1px #aeffae;
+    box-shadow: 1px 1px #aeffae;
+    text-transform: uppercase;
+    position: absolute;
+    transform: translateY(-10px);
+    text-align: center;
+    font-size: 1rem !important;
+    font-weight: bold;
+    border: 2px solid #76ff6b;
+}
+input[type=submit]{
+    background-color: #32008f;
+    display: none;
+}
+#chat-view, #mag-ul {
+    display: flex;
+    flex-direction: column;
+    max-height: 230px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-padding: 0;
+}
+ul{
+    padding: 0;
+    margin: 0;
+}
+div#msg-container, #chat-view, form#chat-form {
+    font-family: monospace;
+    background: black;
+    color: #57ff57;
+    text-shadow: 0 0 #aeffae;
+}
+
+#msg-ul{
+    padding: 30px 15px 30px 15px;
+}
+#chat-view {
+    padding: 15px 15px 30px 15px;
+}
+
+/*htmx indicator*/
+.htmx-indicator{
+    display:none;
+}
+.htmx-request .htmx-indicator{
+    display:inline;
+}
+.htmx-request.htmx-indicator{
+    display:inline;
+}

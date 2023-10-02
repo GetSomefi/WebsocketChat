@@ -1,0 +1,6 @@
+-Peter
+Enjoy 😎
+Use freely and modify
+and then type a message
+Start by typing your nick (press SET)
+Websocket chat (single room)

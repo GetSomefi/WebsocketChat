@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title= title
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    style
+      include ../css/stylePureWebSocket.css
+  body
+    header(class="header-section")
+      div(id="load-indicator")
+    div(class="data-container")
+        h3(id="top-message")= topMsg
+        h2(id="top-message2")= title 
+        if msg
+          h1(id="header")= msg
+        else 
+          h1(id="header")
+    
+    div(id="additional-notifications")
+    div(id="content")        
+        form(
+        hx-get="./write"
+        name="content"
+        hx-indicator="#loading"
+        id="chat-form"
+        hx-swap="afterend")
+            label(for="uname") Username: 
+                br
+                input(id="uname" type="text" name="uname" placeholder="Max. 10 characters")
+                div(id="login") SET
+                br
+            label(id="chat-message" for="msg") Message:
+                br
+                span(id="type-icon") _>:
+                input(id="msg" type="text" name="message" placeholder="Write a message")
+                input(type="submit" value="Send")
+            div(id="loading" class="htmx-indicator") Loading..
+    
+    div(class="side-by-side")
+        div(id="chat-view") Chat loading ... 
+        div(id="msg-container")
+            ul(id="msg-ul")
+              li [CONSOLE] Welcome!
+    
+    script
+        include ../node_modules/htmx.org/dist/htmx.js
+        include ../node_modules/socket.io/client-dist/socket.io.js
+        include ../js/scriptPureWebSocket.js
