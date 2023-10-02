@@ -64,7 +64,7 @@ socket.on('useriswriting', function(msg) {
     //clearTimeout(timeouts[0]);
     if(!document.getElementById("typing" + getUname())){
         document.getElementById("additional-notifications").appendChild(item);
-        //timeouts[0] = setTimeout(()=>item.remove(),1500)
+        timeouts[0] = setTimeout(()=>item.remove(),1500)
     }
 });
 
