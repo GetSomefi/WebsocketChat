@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     });
 });
 
-const safetifier = (str) => {return str.replace(/[^a-zA-Z0-9 ]/g, "*")}
+const safetifier = (str) => {return str.replace(/[^a-zA-Z0-9: ]/g, "*")}
 
 app.get("/write", async (req, res) => {
     //hx-swap="beforeend" for appending
