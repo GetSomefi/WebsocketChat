@@ -29,12 +29,14 @@ app.get('/', (req, res) => {
     });
 });
 
+const safetifier = (str) => {return str.replace(/[^a-zA-Z0-9 ]/g, "*")}
+
 app.get("/write", async (req, res) => {
     //hx-swap="beforeend" for appending
     console.log("/write");
 
-    const content = req.query.message
-    const nick = req.query.uname
+    const content = safetifier(req.query.message)
+    const nick = safetifier(req.query.uname)
 
     if(content!=""){
         const data = await writeToFile(nick,content,fileName);
