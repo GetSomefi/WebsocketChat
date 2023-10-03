@@ -2,6 +2,7 @@ const {app,server,fs,fileName} = require('./pureWebSocketWorker.js');
 const { Server } = require("socket.io");
 const io = new Server(server);
 //const fs = require('fs');
+const port = process.env.PORT || 3000;
 
 let users = [] // known users
 let connections = [] //active connections
@@ -124,10 +125,11 @@ fs.watchFile(fileName,
 }
 );
 
+
 /*SERVER */
-server.listen(3000, () => {
-    console.log('listening on *:3000');
-    console.log("http://localhost:3000");
+server.listen(port, () => {
+    console.log('listening on *:' + port);
+    console.log("http://localhost:" + port);
 }); 
 
 setInterval(()=>notifyUser("The chat is still active (alivecode:"+Math.random()+")"),60000)
