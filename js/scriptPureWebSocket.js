@@ -9,12 +9,24 @@ let timeouts = [];
 
 document.getElementById("msg").focus();
 
+let chatWindowActive = true;
+window.onfocus = ()=>{ chatWindowActive = true;}
+window.onblur = ()=>{ chatWindowActive = false;}
+
+if (("Notification" in window) && Notification.permission !== "denied") {
+    Notification.requestPermission()
+}
+
 //HTMX
 //clears input after send
 document.getElementById("chat-form").addEventListener('htmx:xhr:loadstart', function(evt) {
     const form = document.querySelector("#msg");
     form.value = "";
 });
+// document.getElementById("chat-form").addEventListener('htmx:validation:failed', function(evt) {
+//     alert("Message field is empty!");
+// });
+
 
 //socket stuff
 socket.on('greeting', function(msg) {
@@ -68,6 +80,8 @@ socket.on('useriswriting', function(msg) {
     }
 });
 
+let count = 0;
+
 socket.on('chatRefresh', function(msg) {
     const chat = document.getElementById("chat-view");
     const fh = chat.firstChild.offsetHeight + 10;
@@ -76,6 +90,18 @@ socket.on('chatRefresh', function(msg) {
         chat.innerHTML = msg;
         chat.scrollTo(0,0)
     },200);
+
+    if(count>0 && !chatWindowActive){
+        console.log("MSG!");
+        if ("Notification" in window) {
+            const notification = new Notification("Real time chat: New message!");
+        }
+        document.title = "📩 1 new message!";
+        setTimeout(()=>{
+            document.title = "Realtime chat by GetSOME";
+        },2000);
+    }
+    count++;
 });
 
 //username
@@ -83,14 +109,17 @@ const restoreUname = () => { //from localStorage
     let exists;
     if(localStorage.getItem("uname")){
         document.getElementById("uname").value = localStorage.getItem("uname").split("#")[0]
-        true;
+        exists = localStorage.getItem("uname").split("#")[0]
     } 
-    socket.emit('whoami', getUname());
+    exists = getUname()
+    socket.emit('whoami', exists);
     return exists;
 }
+
 const storeUname = (uname) => {
     localStorage.setItem("uname", uname + "#" + Math.floor(Math.random() * 999999)  );
 }
+
 const getUname = () => {
     let uname = "🙈#"+ Math.floor(Math.random() * 999999);
     if(localStorage.getItem("uname")){

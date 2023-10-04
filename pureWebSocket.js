@@ -10,7 +10,7 @@ let connections = [] //active connections
 /*WEBSOCKET toiminnot*/
 const notifyUser = (msg,chatRefresh) => {
     //console.log("Sending msg: " + msg);
-    //console.log("tämä tapahtuu2");
+    ;
     if(chatRefresh){
         io.emit("chatRefresh",fileContentsToHTML(msg));
     }else{
@@ -36,9 +36,7 @@ const fileContentsToHTML = (data) => {
     ) 
     return messages.reverse().join('');    
 }
-
-
-
+  
 io.on('connection', (socket) => {    
     //load chat on connection
     readTextFile(fileName).then((data)=>notifyUser(data,true));
@@ -124,7 +122,6 @@ fs.watchFile(fileName,
     notifyUser(fs.readFileSync(fileName, "utf8"),true);
 }
 );
-
 
 /*SERVER */
 server.listen(port, () => {
